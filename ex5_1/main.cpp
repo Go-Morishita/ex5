@@ -1,4 +1,3 @@
-//　Edited by Daichi Hotta
 // 
 //  main.cpp
 //  gl3d_hello_world
@@ -6,6 +5,17 @@
 //  Created by Yonghao Yue on 2019/09/28.
 //  Copyright © 2019 Yonghao Yue. All rights reserved.
 //
+
+/*
+* 青山学院大学 理工学部情報テクノロジー学科
+* デジタルメディア設計演習第5回演習課題
+* 共同制作 森下剛・堀田大智・中江朋弘
+*
+* アルゴリズム：
+* メッシュg_Sphereを宣言してgenerateTessellatedSphere()関数でメッシュg_Sphereに球面情報を付与させた。
+* その後、display()関数内でdrawMesh(g_Sphere)関数を実行させレンダリングした。
+*
+*/
 
 #ifdef __APPLE__
 #define GL_SILENCE_DEPRECATION
@@ -52,8 +62,8 @@ MouseMode g_MouseMode = MM_CAMERA;
 double g_FrameSize_WindowSize_Scale_x = 1.0;
 double g_FrameSize_WindowSize_Scale_y = 1.0;
 
-int width = 640;
-int height = 480;
+int width = 1040;
+int height = 680;
 
 int mx, my;
 
@@ -295,7 +305,7 @@ void generateTessellatedSphere(TriMesh& out_mesh, const Eigen::Vector3d& in_cent
         Eigen::Vector3d in_p1{ v[k][1], v[k][3], v[k][2] };		//点v の位置ベクトル
         Eigen::Vector3d in_p2{ v2[k][1], v2[k][3], v2[k][2] };	//点v2 の位置ベクトル
         Eigen::Vector3d in_p2s{ v1[k][1], v1[k][3], v1[k][2] };	//点v1 の位置ベクトル
-        Eigen::Vector3d in_p3{ v3[k][1], v3[k][3], v3[k][2] };		//点v3 の位置ベクトル
+        Eigen::Vector3d in_p3{ v3[k][1], v3[k][3], v3[k][2] };	//点v3 の位置ベクトル
 
         TriMesh V;
         generateTessellatedSquare(V, (in_p2s + in_p2) / 2.0 + in_center, (((in_p3 + in_p2s) / 2.0) - ((in_p2 + in_p1)) / 2.0) / 2.0, (in_p3 - in_p2s) / 2.0, in_kd, in_nSegs);
@@ -551,7 +561,7 @@ int main(int argc, char* argv[])
 
     //make box
     //generateTessellatedBox(g_Box, { 0.7, 0.3, -0.2 }, { 0.3, 0.0, 0.0 }, { 0.0, 0.3, 0.0 }, { 0.0, 0.0, 0.5 }, { 1.0, 1.0, 1.0 }, 8);
-    generateTessellatedSphere(g_Sphere, { 0.0, 0.5, 0.0 }, 0.5, { 0.3, 0.3, 0.3 }, 38);
+    generateTessellatedSphere(g_Sphere, { 0.0, 0.5, 0.0 }, 0.5, { 0.3, 0.3, 0.3 }, 25);
     g_Sphere.texture = prepareTextureFromJpegFile("C://wood2.jpeg");
 
     glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
